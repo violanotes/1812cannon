@@ -7,13 +7,14 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/bootstrap-slider.min.css">
   <link rel="stylesheet" href="css/transparent-button.css">
+  <link rel="stylesheet" href="css/rangeslider.css">
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/bootstrap-slider.min.js"></script>
   <script src="js/cannon-scripts.js"></script>
   <script src="js/cannon-hooks.js"></script>
   <script src="js/jquery.cookie.js"></script>
-  <script src="js/sglide-jquery.min.js"></script>
+  <script src="js/rangeslider.min.js"></script>
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
@@ -207,11 +208,8 @@
       // try to initialize a slider
       console.log("trying to initialize slider")
 
-      $("#div-slider-volume-inner").sGlide({
-      	height		: 20,
-      	startAt		: 70,
-        showKnob  : false,
-      	colorShift	: ['#3a4d31', '#7bb560'],
+      $("#div-slider-volume-inner").rangeslider({
+        polyfill: false,
       });
 
     });
@@ -253,7 +251,11 @@
 
       <div id="span-main-volume">
         <div id="div-slider-volume">
-          <div id="div-slider-volume-inner"></div>
+          <input id="div-slider-volume-inner"
+              type="range"
+              min="10"
+              max="1000"
+          />
         </div>
       </div>
 
