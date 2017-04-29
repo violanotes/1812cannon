@@ -1,1 +1,224 @@
-<h1>1812 Cannon</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>1812 Cannon</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-slider.min.css">
+  <link rel="stylesheet" href="css/transparent-button.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap-slider.min.js"></script>
+  <script src="js/cannon-scripts.js"></script>
+  <script src="js/cannon-hooks.js"></script>
+  <script src="js/jquery.cookie.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+    #button-mute-1 {
+      color: gray;
+    }
+
+    .button-group-1 {
+      font-size: 72px;
+      vertical-align: middle;
+    }
+
+    #button-fire-1-outer {
+      font-size: 48px;
+    }
+
+    .well-invisible {
+      margin: 10px;
+    }
+
+    .footer {
+      bottom: 100vh;
+    }
+
+    #content-0 {
+      height: 50px;
+      background-color: rgb(34, 34, 34);
+      color: white;
+    }
+
+    #content-1 {
+      height: 100vh;
+      height: calc(100vh - 100px);
+    }
+
+    #content-2 {
+      height: 50px;
+      background-color: rgb(34, 34, 34);
+      color: white;
+    }
+
+    #content-2-1 {
+      height: 50px;
+      color: #555;
+    }
+
+    a.navbar-brand {
+      color: #555;
+    }
+
+    #content-3 {
+
+    }
+
+    #content-4 {
+      margin-top: 50px;
+      background-color: rgb(34, 34, 34);
+      color: white;
+    }
+
+    .container {
+      width: 100vw;
+    }
+
+    #slider-volume .slider-selection {
+    	background: #BABABA;
+    }
+
+    .col {
+      margin-right: 0px;
+    }
+
+    .container-fluid {
+      margin-right: 0px;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+
+  </style>
+</head>
+<body>
+
+<div class="container-fluid container-full">
+  <div id="content-0" class="row content">
+
+    <div class="col col-sm-6 text-left">
+      <a id="main-anchor">
+        <a class="navbar-brand" href="#">1812 Cannon</a>
+      </a>
+    </div>
+    <div class="col-sm-6 text-right box" style="font-size: 32px;">
+      <a href="#settings-anchor">
+        <span class="glyphicon glyphicon-info-sign" style="vertical-align: middle; font-size: 32px; color: #555;"></span>
+      </a>
+    </div>
+
+  </div>
+
+  <div id="content-1" class="row content">
+
+    <div class="col-sm-12 text-center box" style="top: calc(50vh - 100px);">
+      <div class="btn-group">
+        <button id="button-fire" type="button" class="btn btn-danger" style="font-size: 48px;"><span class="glyphicon glyphicon-certificate button-group-1"></span><span> Fire!</span></button>
+      </div>
+    </div>
+
+  </div>
+  <div id="content-2" class="row content">
+    <div class="col-sm-12 text-left box" style="padding-left: 2px">
+      <span id="span-main-status" class="btn btn-default gradient btn-transparent" style="border-color: #333333; margin-left: 0px; padding-left: 0px;">
+        <span id="icon-main-status" class="glyphicon glyphicon-flash" style="vertical-align: middle; font-size: 32px; color: red;"></span>
+        <span id="text-main-status" style="font-size: 16px; color: #555;">Active</span>
+      </span>
+    </div>
+  </div>
+  <div id="content-2-1" class="row">
+      <div class="col-xs-6 text-left box">
+        <a id="settings-anchor">
+          <span style="font-size: 32px;">
+            <span class="glyphicon glyphicon-cog" style="vertical-align: middle; font-size: 32px; color: #555;"></span>
+            <span style="font-size: 16px; color: #555;">Settings</span>
+          </span>
+        </a>
+      </div>
+      <div class="col-xs-6 text-right box" style="font-size: 32px;">
+        <a href="#main-anchor">
+          <span style="font-size: 32px;">
+            <span class="glyphicon glyphicon-menu-up" style="vertical-align: middle; font-size: 32px; color: #555;"></span>
+          </span>
+        </a>
+      </div>
+  </div>
+  <div id="content-3" class="content">
+    <div class="row">
+      <div class="col-sm-12 text-center box" style="margin:20px;">
+        <span style="font-size: 32px;">
+          <span class="glyphicon glyphicon-volume-off" style="vertical-align: middle; font-size: 32px; color: #555;"></span>
+          <span style="font-size: 16px; color: #555;"></span>
+        </span>
+        <!--<input id="slider-volume" data-slider-id='slider-volume-slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>-->
+        <input id="slider-volume" type="text" value="" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-10 text-center box" style="margin:20px;">
+        <span style="btn btn-default btn-transparent">
+          <span id="icon-settings-status" class="glyphicon glyphicon-ban-circle" style="vertical-align: middle; font-size: 32px; color: #555;"></span>
+          <span id="text-settings-status" style="font-size: 16px; color: #555;">Disabled</span>
+        </span>
+        <button id="button-status" class="btn btn-default">Click to Enable</button>
+        <input type="checkbox" id="checkbox-status" style="display: none" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 text-right box">
+        <div id="button-settings-cancel" class="btn btn-default">Restore Defaults</div>
+        <div id="button-settings-ok" class="btn btn-default">Save</div>
+      </div>
+    </div>
+  </div>
+  <div id="content-4" class="row content">
+
+    <div class="col-sm-12 text-center box">
+      About<br>
+      About<br>
+      About<br>
+      About<br>
+      About<br>
+      About<br>
+      About<br>
+      About<br>
+      About<br>
+      About<br>
+      About<br>
+      About<br>
+      About<br>
+      About<br>
+      About<br>
+
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
