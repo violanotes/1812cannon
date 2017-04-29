@@ -94,10 +94,16 @@
       margin-right: 0px;
     }
 
+    html {
+      height: 100%;
+    }
+
     body {
       padding-top: 50px;
       padding-bottom: 100px;
+      height:100%;
     }
+
     .toolbar {
       background-color: rgb(34, 34, 34);
       color: #555;
@@ -118,10 +124,11 @@
     .content-pane {
       padding: 0px;
       border: 2px solid red;
-      height: -webkit-calc(100vh - 150px);
+      height: 100%;
+      /*height: -webkit-calc(100vh - 150px);
       height: -moz-calc(100vh - 150px);
-      height: calc(100vh - 150px);
-      width: 100vw;
+      height: calc(100vh - 150px);*/
+      width: 100%;
     }
 
     .content-pane-inner {
