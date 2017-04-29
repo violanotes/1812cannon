@@ -95,7 +95,8 @@
     }
 
     body {
-      padding-top: 70px;
+      padding-top: 50px;
+      padding-bottom: 100px;
     }
     .toolbar {
       background-color: rgb(34, 34, 34);
@@ -114,6 +115,33 @@
       z-index: 500;
     }
 
+    .content-pane {
+      padding: 0px;
+      border: 0px solid red;
+      height: -webkit-calc(100vh - 150px);
+      height: -moz-calc(100vh - 150px);
+      height: calc(100vh - 150px);
+    }
+
+    .content-pane-inner {
+      position: absolute;
+      height: -webkit-calc(100vh - 150px);
+      height: -moz-calc(100vh - 150px);
+      height: calc(100vh - 150px);
+      width: 100vw;
+      border: 0px solid green;
+    }
+
+    .content-pane-center {
+      position: absolute;
+      display: inline;
+      left: 50%;
+			top: 50%;
+      border: 0px solid blue;
+			-webkit-transform: translateX(-50%) translateY(-50%);
+      -moz-transform: translateX(-50%) translateY(-50%);
+			transform: translateX(-50%) translateY(-50%);
+    }
 
   </style>
 </head>
@@ -161,8 +189,10 @@
   </div>
 </div>
 
-<div class="container" style="height: 1000px;">
-  Hello
+<div class="content-pane">
+  <div class="content-pane-inner">
+    <div class="content-pane-center"><button id="button-fire" type="button" class="btn btn-danger" style="font-size: 48px;"><span class="glyphicon glyphicon-certificate button-group-1"></span><span> Fire!</span></button></div>
+  </div>
 </div>
 
 </body>
