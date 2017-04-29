@@ -7,12 +7,14 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/bootstrap-slider.min.css">
   <!--<link rel="stylesheet" href="css/transparent-button.css">-->
+  <link rel="stylesheet" href="css/rangeslider.css">
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/bootstrap-slider.min.js"></script>
   <script src="js/cannon-scripts.js"></script>
   <script src="js/cannon-hooks.js"></script>
   <script src="js/jquery.cookie.js"></script>
+  <script src="js/rangeslider.min.js"></script>
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
@@ -94,9 +96,17 @@
       margin-right: 0px;
     }
 
-    body {
-      padding-top: 70px;
+    html {
+      height: 100%;
     }
+
+    body {
+      padding-top: 50px;
+      padding-bottom: 50px;
+      height:100%;
+      border: 0px solid yellow;
+    }
+
     .toolbar {
       background-color: rgb(34, 34, 34);
       color: #555;
@@ -111,7 +121,96 @@
     .toolbar-bottom {
       bottom: 0px;
       width: 100%;
+      height: 50px;
       z-index: 500;
+    }
+
+    .content-pane {
+      padding: 0px;
+      border: 0px solid red;
+      height: 100%;
+      /*height: -webkit-calc(100vh - 150px);
+      height: -moz-calc(100vh - 150px);
+      height: calc(100vh - 150px);*/
+      width: 100%;
+    }
+
+    .vertical-center {
+
+      position: relative;
+      border: 0px solid blue;
+
+			top: 50%;
+			-webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+			transform: translateY(-50%);*/
+
+    }
+
+    #button-fire {
+      position: static;
+    }
+
+    #slider-volume {
+      display: inline;
+      width: 100%;
+    }
+
+    #toolbar-bottom-left {
+      float: left;
+      width: auto;
+    }
+
+    #span-main-settings {
+      padding-top: 8px;
+      padding-right: 8px;
+    }
+
+    #span-main-volume {
+      width: auto;
+      overflow: hidden;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    #div-slider-volume {
+      width: 100%;
+      height: 50px;
+      /*border: 2px solid yellow;*/
+      padding-top: 12px;
+      margin-top: 3px;
+    }
+
+    #div-slider-volume-inner {
+      width: 100%;
+      height: 100%;
+      border: 2px solid purple;
+    }
+
+    .rangeslider--horizontal {
+      background-color: #333;
+    }
+
+    .rangeslider__fill {
+      background-color: #555;
+    }
+
+    .rangeslider__handle {
+      border: 1px solid #888888;
+      background-image: -webkit-linear-gradient(rgba(85, 85, 85, .9), rgba(0, 0, 0, .9));
+      background-image: linear-gradient(rgba(85, 85, 85, .9), rgba(0, 0, 0, .9));
+      -moz-box-shadow: 0 0 8px rgba(34, 34, 34, 0.3);
+      -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 8px rgba(34, 34, 34, 0.3);
+    }
+
+    .rangeslider--active .rangeslider__handle {
+      border: 1px solid #888888;
+      background-image: -webkit-linear-gradient(rgba(85, 85, 85, .9), rgba(0, 0, 0, .9));
+      background-image: linear-gradient(rgba(85, 85, 85, .9), rgba(0, 0, 0, .9));
+      -moz-box-shadow: 0 0 8px rgba(34, 34, 34, 0.3);
+      -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 8px rgba(34, 34, 34, 0.3);
     }
 
     .btn-transparent.gradient {
@@ -143,6 +242,19 @@
     }
 
   </style>
+
+  <script>
+    $(function() {
+
+      // try to initialize a slider
+      console.log("trying to initialize slider")
+
+      $("#div-slider-volume-inner").rangeslider({
+        polyfill: false,
+      });
+
+    });
+  </script>
 </head>
 <body>
 
@@ -155,7 +267,7 @@
     </div>
     <div class="col-xs-6 text-right">
       <a href="#settings-anchor">
-        <span class="glyphicon glyphicon-info-sign" style="vertical-align: middle; font-size: 32px; color: #555;"></span>
+        <span id="span-main-settings" class="glyphicon glyphicon-info-sign" style="vertical-align: middle; font-size: 32px; color: #555;"></span>
       </a>
     </div>
   </div>
@@ -163,107 +275,40 @@
 
 <div id="content-0-1" class="affix toolbar toolbar-bottom">
   <div class="row">
-    <div class="col-xs-6 text-left">
-      <a id="main-anchor">
-        <a class="navbar-brand" href="#">1812 Cannon</a>
-      </a>
-    </div>
-    <div class="col-xs-6 text-right">
-      <a href="#settings-anchor">
-        <span class="glyphicon glyphicon-info-sign" style="vertical-align: middle; font-size: 32px; color: #555;"></span>
-      </a>
-    </div>
-  </div>
-</div>
+    <div class="col-xs-12 text-left">
+      <span id="toolbar-bottom-left">
+        <span id="span-main-status" class="btn btn-default gradient btn-transparent" style="border-color: #333333; margin-left: 0px; padding-left: 0px;">
+          <span id="icon-main-status" class="glyphicon glyphicon-flash" style="vertical-align: middle; font-size: 32px; color: red;"></span>
+          <span id="text-main-status" style="font-size: 16px; color: #555;">Active</span>
+        </span>
 
-<div class="container-fluid">
-
-
-  <div id="content-1" class="row content">
-
-    <div class="col-sm-12 text-center box" style="top: calc(50vh - 100px);">
-      <div class="btn-group">
-        <button id="button-fire" type="button" class="btn btn-danger" style="font-size: 48px;"><span class="glyphicon glyphicon-certificate button-group-1"></span><span> Fire!</span></button>
-      </div>
-    </div>
-
-  </div>
-  <div id="content-2" class="row content">
-    <div class="col-sm-12 text-left box" style="padding-left: 2px">
-      <span id="span-main-status" class="btn btn-default gradient btn-transparent" style="border-color: #333333; margin-left: 0px; padding-left: 0px;">
-        <span id="icon-main-status" class="glyphicon glyphicon-flash" style="vertical-align: middle; font-size: 32px; color: red;"></span>
-        <span id="text-main-status" style="font-size: 16px; color: #555;">Active</span>
-      </span>
-    </div>
-  </div>
-  <div id="content-2-1" class="row">
-      <div class="col-xs-6 text-left box">
-        <a id="settings-anchor">
-          <span style="font-size: 32px;">
-            <span class="glyphicon glyphicon-cog" style="vertical-align: middle; font-size: 32px; color: #555;"></span>
-            <span style="font-size: 16px; color: #555;">Settings</span>
-          </span>
-        </a>
-      </div>
-      <div class="col-xs-6 text-right box" style="font-size: 32px;">
-        <a href="#main-anchor">
-          <span style="font-size: 32px;">
-            <span class="glyphicon glyphicon-menu-up" style="vertical-align: middle; font-size: 32px; color: #555;"></span>
-          </span>
-        </a>
-      </div>
-  </div>
-  <div id="content-3" class="content">
-    <div class="row">
-      <div class="col-sm-12 text-center box" style="margin:20px;">
-        <span style="font-size: 32px;">
+        <span class="btn btn-default gradient btn-transparent" style="border-color: #333333; margin-left: 5px; padding-left: 5px; padding-right: 5px;">
           <span class="glyphicon glyphicon-volume-off" style="vertical-align: middle; font-size: 32px; color: #555;"></span>
           <span style="font-size: 16px; color: #555;"></span>
         </span>
-        <!--<input id="slider-volume" data-slider-id='slider-volume-slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>-->
-        <input id="slider-volume" type="text" value="" />
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-10 text-center box" style="margin:20px;">
-        <span style="btn btn-default btn-transparent">
-          <span id="icon-settings-status" class="glyphicon glyphicon-ban-circle" style="vertical-align: middle; font-size: 32px; color: #555;"></span>
-          <span id="text-settings-status" style="font-size: 16px; color: #555;">Disabled</span>
-        </span>
-        <button id="button-status" class="btn btn-default">Click to Enable</button>
-        <input type="checkbox" id="checkbox-status" style="display: none" />
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 text-right box">
-        <div id="button-settings-cancel" class="btn btn-default">Restore Defaults</div>
-        <div id="button-settings-ok" class="btn btn-default">Save</div>
-      </div>
-    </div>
-  </div>
-  <div id="content-4" class="row content">
 
-    <div class="col-sm-12 text-center box">
-      About<br>
-      About<br>
-      About<br>
-      About<br>
-      About<br>
-      About<br>
-      About<br>
-      About<br>
-      About<br>
-      About<br>
-      About<br>
-      About<br>
-      About<br>
-      About<br>
-      About<br>
+      </span>
+
+
+      <div id="span-main-volume">
+        <div id="div-slider-volume">
+          <input id="div-slider-volume-inner"
+              type="range"
+              min="10"
+              max="1000"
+          />
+        </div>
+      </div>
 
     </div>
   </div>
 </div>
 
+<!--  -->
+
+<div class="content-pane">
+    <div class="vertical-center text-center"><button id="button-fire" type="button" class="btn btn-danger" style="font-size: 48px;"><span class="glyphicon glyphicon-certificate button-group-1"></span><span> Fire!</span></button></div>
+</div>
 
 </body>
 </html>
