@@ -870,7 +870,7 @@
 
 .btn-transparent.gradient {
     background: -moz-linear-gradient(top,  #2222 50%, #222 50%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#2222), color-stop(50%,#222)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(linear, left top, left bottom, color-stop(50%,#2222), color-stop(50%,#222)); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top,  #2222 50%,#222 50%); /* Chrome10+,Safari5.1+ */
     background: -o-linear-gradient(top,  #2222 50%,#222 50%); /* Opera 11.10+ */
     background: -ms-linear-gradient(top,  #2222 50%,#222 50%); /* IE10+ */
@@ -879,7 +879,7 @@
 }
 .btn-transparent.gradient:hover, .btn-transparent.gradient:focus, .btn-transparent.gradient:active, .btn-transparent.gradient.active, .open > .dropdown-toggle.btn-transparent {
     background: -moz-linear-gradient(top,  #222222 50%, #111111 50%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#222222), color-stop(50%,#111111)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(linear, left top, left bottom, color-stop(50%,#222222), color-stop(50%,#111111)); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top,  #222222 50%,#111111 50%); /* Chrome10+,Safari5.1+ */
     background: -o-linear-gradient(top,  #222222 50%,#111111 50%); /* Opera 11.10+ */
     background: -ms-linear-gradient(top,  #222222 50%,#111111 50%); /* IE10+ */
@@ -888,7 +888,7 @@
 }
 .btn-transparent.gradient:active, .btn-transparent.gradient.active {
     background: -moz-linear-gradient(top,  #267c99 50%, #007299 50%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#267c99), color-stop(50%,#007299)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(linear, left top, left bottom, color-stop(50%,#267c99), color-stop(50%,#007299)); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top,  #267c99 50%,#007299 50%); /* Chrome10+,Safari5.1+ */
     background: -o-linear-gradient(top,  #267c99 50%,#007299 50%); /* Opera 11.10+ */
     background: -ms-linear-gradient(top,  #267c99 50%,#007299 50%); /* IE10+ */
