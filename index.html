@@ -123,7 +123,7 @@
 
     .content-pane {
       padding: 0px;
-      border: 2px solid red;
+      border: 0px solid red;
       height: 100%;
       /*height: -webkit-calc(100vh - 150px);
       height: -moz-calc(100vh - 150px);
@@ -131,19 +131,10 @@
       width: 100%;
     }
 
-    .content-pane-inner {
-      position: absolute;
-      height: -webkit-calc(100vh - 150px);
-      height: -moz-calc(100vh - 150px);
-      height: calc(100vh - 150px);
-      width: 100vw;
-      border: 2px solid green;
-    }
-
     .vertical-center {
 
       position: relative;
-      border: 2px solid blue;
+      border: 0px solid blue;
 
 			top: 50%;
 			-webkit-transform: translateY(-50%);
@@ -202,12 +193,10 @@
   </div>
 </div>
 
-<!-- <span id="button-fire" type="button" class="btn btn-danger" style="font-size: 48px;"><span class="glyphicon glyphicon-certificate button-group-1"></span><span> Fire!</span></span> -->
+<!--  -->
 
 <div class="content-pane">
-
-    <div class="vertical-center text-center">Hello What do you know about that!</div>
-
+    <div class="vertical-center text-center"><button id="button-fire" type="button" class="btn btn-danger" style="font-size: 48px;"><span class="glyphicon glyphicon-certificate button-group-1"></span><span> Fire!</span></button></div>
 </div>
 
 </body>
