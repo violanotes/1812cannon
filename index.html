@@ -159,11 +159,19 @@
     #toolbar-bottom-left {
       float: left;
       width: auto;
+      height: 100%;
     }
 
     #span-main-settings {
       padding-top: 8px;
       padding-right: 8px;
+    }
+
+    #span-main-status {
+      border-color: #333333;
+      margin-left: 2px;
+      margin-top: 2px;
+      padding-left: 5px;
     }
 
     #span-main-volume {
@@ -277,7 +285,7 @@
   <div class="row">
     <div class="col-xs-12 text-left">
       <span id="toolbar-bottom-left">
-        <span id="span-main-status" class="btn btn-default gradient btn-transparent" style="border-color: #333333; margin-left: 0px; padding-left: 0px;">
+        <span id="span-main-status" class="btn btn-default gradient btn-transparent">
           <span id="icon-main-status" class="glyphicon glyphicon-flash" style="vertical-align: middle; font-size: 32px; color: red;"></span>
           <span id="text-main-status" style="font-size: 16px; color: #555;">Active</span>
         </span>
