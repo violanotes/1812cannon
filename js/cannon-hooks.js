@@ -12,7 +12,8 @@ function volumeSliderCallbackOnSlide(position, value) {
 
 $(function() {
   // load GUI components that require JS
-  initializeGUI();
+  initializeGUI()
+  fetchAJAXContent()
 
   loadSavedSettings(readSavedSettings());
 
