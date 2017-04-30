@@ -2,6 +2,18 @@
 
 // actions
 
+// declare global variable
+currentSettings = {}
+globalSettins = {}
+
+function onBeginLoadingAJAXContent() {
+
+}
+
+function onEndLoadingAJAXContent() {
+
+}
+
 function initializeGUI() {
   // Don't use the slider implementation for now
   // $('#slider-volume').slider({
@@ -38,27 +50,35 @@ function clearSavedSettings() {
 
 function loadSavedSettings(settings) {
   // create or modify global variable
-  globalSettings = settings
+  initialSettings = settings
+
+  // copy values into currentSettings
+  currentSettings["volume"] = initialSettings["volume"]
+  currentSettings["enabled"] = initialSettings["enabled"]
 
   afterLoadSavedSettings()
 }
 
 function afterLoadSavedSettings() {
   // set initial state of stateful elements
-  console.log("read settings: " + JSON.stringify(globalSettings))
+  console.log("read settings: " + JSON.stringify(initialSettings))
 
   // volume setting
-  setInitialVolumeDOM(globalSettings["volume"])
+  setInitialVolumeDOM(initialSettings["volume"])
+  setVolumeGUI(initialSettings["volume"])
 
   // status setting
-  setStatusGUI(globalSettings["enabled"])
-  setInitialStatusDOM(globalSettings["enabled"])
-
-
+  setStatusGUI(initialSettings["enabled"])
+  setInitialStatusDOM(initialSettings["enabled"])
 }
 
 function setInitialVolumeDOM(volume) {
   $("#slider-volume").attr("value", volume)
+}
+
+function setVolumeGUI(volume) {
+  $("#div-slider-volume-inner").val(volume).change()
+  afterChangeVolume(volume)
 }
 
 function setVolumeDOM(volume) {
@@ -135,51 +155,134 @@ function afterFireCannon() {
 }
 
 function clickStatusButton() {
-  setStatusDOM(!$("#checkbox-status").prop("checked"))
-  console.log("clickStatusButton finished setStatusDOM(): " + $("#checkbox-status").prop("checked"))
-  $("#checkbox-status").prop("checked") ? enableCannon() : disableCannon()
+  currentSettings["enabled"] == true ? disableCannon() : enableCannon()
 }
 
 function disableCannon() {
   console.log("disableCannon()")
   setStatusGUI(false)
+  currentSettings["enabled"] = false
+  afterDisableCannon()
 }
 
 function afterDisableCannon() {
-
+  saveSettings()
 }
 
 function enableCannon() {
   console.log("enableCannon()")
   setStatusGUI(true)
+  currentSettings["enabled"] = true
+  afterEnableCannon()
 }
 
 function afterEnableCannon() {
+  saveSettings()
+}
+
+function whileChangingVolume(volume) {
+  if (volume == 0) {
+    currentSettings["muted"] = true
+    changeVolumeIcon("volume-off")
+  } else if (volume < 50) {
+    currentSettings["muted"] = false
+    changeVolumeIcon("volume-down")
+  } else {
+    currentSettings["muted"] = false
+    changeVolumeIcon("volume-up")
+  }
+}
+
+function afterChangeVolume(volume) {
+  if (volume == 0) {
+    currentSettings["muted"] = true
+    changeVolumeIcon("volume-off")
+  } else if (volume < 50) {
+    currentSettings["muted"] = false
+    changeVolumeIcon("volume-down")
+  } else {
+    currentSettings["muted"] = false
+    changeVolumeIcon("volume-up")
+  }
+
+  currentSettings["volume"] = volume
+  saveSettings()
+}
+
+function changeVolumeIcon(glyphicon) {
+  console.log("changeVolumeIcon(" + glyphicon + ")")
+
+  $("#icon-main-volume").removeClass("glyphicon-volume-down")
+  $("#icon-main-volume").removeClass("glyphicon-volume-up")
+  $("#icon-main-volume").removeClass("glyphicon-volume-off")
+
+  switch (glyphicon) {
+    case "volume-off":
+      $("#icon-main-volume").removeClass("glyphicon-volume-down")
+      $("#icon-main-volume").removeClass("glyphicon-volume-up")
+      $("#icon-main-volume").addClass("glyphicon-volume-off")
+      break
+    case "volume-down":
+      $("#icon-main-volume").removeClass("glyphicon-volume-up")
+      $("#icon-main-volume").removeClass("glyphicon-volume-off")
+      $("#icon-main-volume").addClass("glyphicon-volume-down")
+      break
+    case "volume-up":
+      $("#icon-main-volume").removeClass("glyphicon-volume-down")
+      $("#icon-main-volume").removeClass("glyphicon-volume-off")
+      $("#icon-main-volume").addClass("glyphicon-volume-up")
+      break;
+  }
 
 }
 
-function afterChangeVolume() {
+function performMute() {
+  // save pre-mute volume
+  currentSettings["preMuteVolume"] = $("#div-slider-volume-inner").val()
+  $("#div-slider-volume-inner").val(0).change()
+  afterChangeVolume(0)
+  currentSettings["muted"] = true
+}
 
+function performUnmute() {
+  // search for saved pre-mute volume-up
+  // otherwise, just set volume to 10
+  if (currentSettings["preMuteVolume"] != undefined) {
+    setVolumeGUI(currentSettings["preMuteVolume"])
+  } else {
+    setVolumeGUI(10)
+  }
+  currentSettings["muted"] = false
 }
 
 function afterChangeAnySetting() {
 
 }
 
-function saveSettings() {
-  beforeSaveSettings()
+saveSettings = (function() {
+  var isFirst = true
 
-  // do stuff
-  var settings = getCurrentSettings()
-  writeSavedSettings(settings)
+  var returnFunction = function() {
+    if (isFirst) {
+      isFirst = false
+    } else {
+      // do the function
+      beforeSaveSettings()
 
-  afterSaveSettings()
-}
+      var settings = getCurrentSettings()
+      writeSavedSettings(settings)
+
+      afterSaveSettings()
+    }
+  }
+
+  return returnFunction
+})()
 
 function getCurrentSettings() {
   var settings = {}
-  settings["volume"] = $("#slider-volume").val()
-  settings["enabled"] = $("#checkbox-status").prop("checked")
+  settings["volume"] = $("#div-slider-volume-inner").val()
+  settings["enabled"] = currentSettings["enabled"]
   console.log("current settings: " + JSON.stringify(settings))
 
   return settings;
@@ -190,8 +293,7 @@ function beforeSaveSettings() {
 }
 
 function afterSaveSettings() {
-  // confirm cookies:
-  loadSavedSettings(readSavedSettings())
+
 }
 
 function cancelSettings() {
