@@ -7,11 +7,26 @@ currentSettings = {}
 globalSettins = {}
 
 function onBeginLoadingAJAXContent() {
-
+  currentSettings["loading"] = true
+  loadingStatusButton()
+  simulateAjaxLoadTimePassing(onEndLoadingAJAXContent)
 }
 
 function onEndLoadingAJAXContent() {
+  currentSettings["loading"] = false
+  $("#ajax-loader").css("display", "none")
+  $("#button-fire").css("display", "initial")
+  readyStatusButton()
+}
 
+function simulateAjaxLoadTimePassing(callback) {
+  setTimeout(function(){
+    callback()
+  }, 3000);
+}
+
+function fetchAJAXContent() {
+  onBeginLoadingAJAXContent()
 }
 
 function initializeGUI() {
@@ -101,9 +116,11 @@ function setStatusGUI(enabled) {
     $("#icon-settings-status").addClass("glyphicon-flash")
     $("#icon-settings-status").css("color", "red");
 
-    $("#text-settings-status").text("Enabled")
-    $("#text-main-status").text("Enabled")
-    $("#button-status").text("Click to Disable")
+    if (currentSettings["loading"] !== true) {
+      $("#text-settings-status").text("Enabled")
+      $("#text-main-status").text("Enabled")
+      $("#button-status").text("Click to Disable")
+    }
   } else {
 
     $("#button-fire").addClass("disabled")
@@ -118,9 +135,11 @@ function setStatusGUI(enabled) {
     $("#icon-settings-status").addClass("glyphicon-ban-circle")
     $("#icon-settings-status").css("color", "#555");
 
-    $("#text-settings-status").text("Disabled")
-    $("#text-main-status").text("Disabled")
-    $("#button-status").text("Click to Enable")
+    if (currentSettings["loading"] !== true) {
+      $("#text-settings-status").text("Disabled")
+      $("#text-main-status").text("Disabled")
+      $("#button-status").text("Click to Enable")
+    }
   }
 }
 
@@ -155,7 +174,25 @@ function afterFireCannon() {
 }
 
 function clickStatusButton() {
-  currentSettings["enabled"] == true ? disableCannon() : enableCannon()
+  if (!currentSettings["loading"] == true)
+    currentSettings["enabled"] == true ? disableCannon() : enableCannon()
+}
+
+function readyStatusButton() {
+  $("#span-main-status").removeClass("disabled")
+  $("#icon-main-status").css("display", "initial")
+  $("#text-main-status").css("color", "#555")
+  currentSettings["enabled"] == true ?
+    $("#text-main-status").text("Enabled") :
+    $("#text-main-status").text("Disabled")
+}
+
+function loadingStatusButton() {
+  $("#span-main-status").addClass("disabled")
+  $("#icon-main-status").css("display", "none")
+  $("#text-main-status").css("color", "#cccccc")
+  $("#icon-main-status").css("display", "none")
+  $("#text-main-status").text("Loading")
 }
 
 function disableCannon() {
