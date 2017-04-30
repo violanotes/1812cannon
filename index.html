@@ -149,6 +149,13 @@
 
     #button-fire {
       position: static;
+      display: none;
+    }
+
+    #ajax-loader {
+      position: static;
+      height: 100px;
+      width: 100px;
     }
 
     #slider-volume {
@@ -321,6 +328,7 @@
 
 <div class="content-pane">
     <div class="vertical-center text-center"><button id="button-fire" type="button" class="btn btn-danger" style="font-size: 48px;"><span class="glyphicon glyphicon-certificate button-group-1"></span><span> Fire!</span></button></div>
+    <div class="vertical-center text-center"><img id="ajax-loader" alt="Loading..." src="img/ajax-loader-large.gif" /></div>
 </div>
 
 </body>
