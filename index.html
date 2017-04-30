@@ -169,10 +169,11 @@
 
     #span-main-status {
       border-color: #333333;
-      margin-left: 1px;
+      margin-left: 0px;
       margin-top: 2px;
       padding-left: 5px;
-      padding-bottom: 7px;
+      padding-bottom: 8px;
+      width: 110px;
     }
 
     #span-main-volume {
@@ -193,7 +194,8 @@
     #div-slider-volume-inner {
       width: 100%;
       height: 100%;
-      border: 2px solid purple;
+      visibility: hidden; /* hide the input, so it won't be visible during loading */
+      /*border: 2px solid purple;*/
     }
 
     .rangeslider--horizontal {
@@ -260,6 +262,8 @@
 
       $("#div-slider-volume-inner").rangeslider({
         polyfill: false,
+        onSlide: volumeSliderCallbackOnSlide,
+        onSlideEnd: volumeSliderCallbackOnSlideEnd
       });
 
     });
@@ -269,12 +273,12 @@
 
 <div id="content-0" class="affix toolbar toolbar-top">
   <div class="row">
-    <div class="col-xs-6 text-left">
+    <div class="col-xs-8 text-left">
       <a id="main-anchor">
         <a class="navbar-brand" href="#">1812 Cannon</a>
       </a>
     </div>
-    <div class="col-xs-6 text-right">
+    <div class="col-xs-4 text-right">
       <a href="#settings-anchor">
         <span id="span-main-settings" class="glyphicon glyphicon-info-sign" style="vertical-align: middle; font-size: 32px; color: #555;"></span>
       </a>
@@ -292,7 +296,7 @@
         </span>
 
         <span class="" style="border-color: #333333; margin-left: 5px; padding-left: 5px; padding-right: 5px;">
-          <span class="glyphicon glyphicon-volume-off" style="vertical-align: middle; font-size: 32px; color: #555;"></span>
+          <span id="icon-main-volume" class="glyphicon glyphicon-volume-off" style="vertical-align: middle; font-size: 32px; color: #555;"></span>
           <span style="font-size: 16px; color: #555;"></span>
         </span>
 
@@ -303,8 +307,8 @@
         <div id="div-slider-volume">
           <input id="div-slider-volume-inner"
               type="range"
-              min="10"
-              max="1000"
+              min="0"
+              max="100"
           />
         </div>
       </div>
