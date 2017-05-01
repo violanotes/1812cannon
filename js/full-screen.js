@@ -28,12 +28,14 @@ function getViewport() {
 $(function() {
   var viewport = getViewport()
   $(".app-window").css("height", viewport.height + "px")
+  $("html").css("height", viewport.height + "px")
   $("body").css("height", viewport.height + "px")
 });
 
 $(window).resize(function() {
   console.log("resized")
   var viewport = getViewport()
+  $("html").css("height", viewport.height + "px")
   $("body").css("height", viewport.height + "px")
   $("#debug-text").append(
     "ROTATED: " +
