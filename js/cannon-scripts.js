@@ -9,7 +9,6 @@ globalSettins = {}
 function onBeginLoadingAJAXContent() {
   currentSettings["loading"] = true
   loadingStatusButton()
-  simulateAjaxLoadTimePassing(onEndLoadingAJAXContent)
 }
 
 function onEndLoadingAJAXContent() {
@@ -27,6 +26,7 @@ function simulateAjaxLoadTimePassing(callback) {
 
 function fetchAJAXContent() {
   onBeginLoadingAJAXContent()
+  cannon.load(onEndLoadingAJAXContent)
 }
 
 function initializeGUI() {
@@ -155,11 +155,12 @@ function setStatusDOM(enabled) {
 
 function fireCannon() {
 
-  if ($("#checkbox-status").prop("checked")) {
+  if (currentSettings["enabled"] == true) {
     beforeFireCannon()
 
     // do stuff
     console.log("fireCannon()")
+    cannon.fire()
 
     afterFireCannon()
   }
@@ -241,6 +242,8 @@ function afterChangeVolume(volume) {
     currentSettings["muted"] = false
     changeVolumeIcon("volume-up")
   }
+
+  cannon.changeVolume(volume)
 
   currentSettings["volume"] = volume
   saveSettings()
