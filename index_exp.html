@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>1813 Cannon</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-slider.min.css">
+  <!--<link rel="stylesheet" href="css/transparent-button.css">-->
+  <link rel="stylesheet" href="css/rangeslider.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap-slider.min.js"></script>
+  <script src="js/cannon-scripts.js"></script>
+  <script src="js/cannon-hooks.js"></script>
+  <script src="js/jquery.cookie.js"></script>
+  <script src="js/rangeslider.min.js"></script>
+  <script src="js/full-screen.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+    #button-mute-1 {
+      color: gray;
+    }
+
+    .button-group-1 {
+      font-size: 72px;
+      vertical-align: middle;
+    }
+
+    #button-fire-1-outer {
+      font-size: 48px;
+    }
+
+    .well-invisible {
+      margin: 10px;
+    }
+
+    .footer {
+      bottom: 100vh;
+    }
+
+    #content-1 {
+      height: 100vh;
+      height: calc(100vh - 100px);
+    }
+
+    #content-2 {
+      height: 50px;
+      background-color: rgb(34, 34, 34);
+      color: white;
+    }
+
+    #content-2-1 {
+      height: 50px;
+      color: #555;
+    }
+
+    a.navbar-brand {
+      color: #555;
+    }
+
+    #content-3 {
+
+    }
+
+    #content-4 {
+      margin-top: 50px;
+      background-color: rgb(34, 34, 34);
+      color: white;
+    }
+
+    .container {
+      width: 100vw;
+    }
+
+    #slider-volume .slider-selection {
+    	background: #BABABA;
+    }
+
+    .col {
+      margin-right: 0px;
+    }
+
+    .container-fluid {
+      margin-right: 0px;
+    }
+
+    html {
+      height: 100%;
+      height: 100vh;
+      /*overflow: hidden;*/
+    }
+
+    body {
+      padding-top: 50px;
+      padding-bottom: 50px;
+      height:100%;
+      border: 2px solid yellow;
+      overflow: auto;
+    }
+
+    .toolbar {
+      background-color: rgb(34, 34, 34);
+      color: #555;
+    }
+
+    .toolbar-top {
+      top: 0px;
+      width: 100%;
+      z-index: 500;
+    }
+
+    .toolbar-bottom {
+      bottom: 0px;
+      width: 100%;
+      height: 50px;
+      z-index: 500;
+    }
+
+    .content-pane {
+      padding: 0px;
+      border: 2px solid red;
+      height: 100%;
+      /*height: -webkit-calc(100vh - 150px);
+      height: -moz-calc(100vh - 150px);
+      height: calc(100vh - 150px);*/
+      width: 100%;
+    }
+
+    .vertical-center {
+
+      position: relative;
+      border: 0px solid blue;
+
+			top: 50%;
+			-webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+			transform: translateY(-50%);*/
+
+    }
+
+    #button-fire {
+      position: static;
+      display: none;
+    }
+
+    #ajax-loader {
+      position: static;
+      height: 100px;
+      width: 100px;
+    }
+
+    #slider-volume {
+      display: inline;
+      width: 100%;
+    }
+
+    #toolbar-bottom-left {
+      float: left;
+      width: auto;
+      height: 100%;
+    }
+
+    #toolbar-bottom-left-inner {
+      display: inherit;
+      width: 100%;
+      height: 100%;
+      border: 0px solid yellow;
+    }
+
+    #span-main-settings {
+      padding-top: 8px;
+      padding-right: 8px;
+    }
+
+    #span-main-status {
+      border-color: #333333;
+      margin-left: 0px;
+      margin-top: 1px;
+      padding: 0px;
+      width: 110px;
+      height: 48px;
+    }
+
+    #icon-main-status {
+      color: rgb(85, 85, 85);
+      display: initial;
+      position: inherit;
+      left: 2px;
+      font-size: 32px;
+      color: red;
+      float: left;
+    }
+
+    #text-main-status {
+      font-size: 16px;
+      color: rgb(85, 85, 85);
+      display: inherit;
+      position: relative;
+    }
+
+    #span-main-volume {
+      width: auto;
+      overflow: hidden;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    #div-slider-volume {
+      width: 100%;
+      height: 50px;
+      /*border: 2px solid yellow;*/
+      padding-top: 12px;
+      margin-top: 3px;
+    }
+
+    #div-slider-volume-inner {
+      width: 100%;
+      height: 100%;
+      visibility: hidden; /* hide the input, so it won't be visible during loading */
+      /*border: 2px solid purple;*/
+    }
+
+    .rangeslider--horizontal {
+      background-color: #333;
+    }
+
+    .rangeslider__fill {
+      background-color: #555;
+    }
+
+    .rangeslider__handle {
+      border: 1px solid #888888;
+      background-image: -webkit-linear-gradient(rgba(85, 85, 85, .9), rgba(0, 0, 0, .9));
+      background-image: linear-gradient(rgba(85, 85, 85, .9), rgba(0, 0, 0, .9));
+      -moz-box-shadow: 0 0 8px rgba(34, 34, 34, 0.3);
+      -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 8px rgba(34, 34, 34, 0.3);
+    }
+
+    .rangeslider--active .rangeslider__handle {
+      border: 1px solid #888888;
+      background-image: -webkit-linear-gradient(rgba(85, 85, 85, .9), rgba(0, 0, 0, .9));
+      background-image: linear-gradient(rgba(85, 85, 85, .9), rgba(0, 0, 0, .9));
+      -moz-box-shadow: 0 0 8px rgba(34, 34, 34, 0.3);
+      -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 8px rgba(34, 34, 34, 0.3);
+    }
+
+    .btn-transparent.gradient {
+        background: -moz-linear-gradient(top,  #222222 50%, #111111 50%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#222222), color-stop(50%,#111111)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, #222222 50%,#111111 50%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  #222222 50%,#111111 50%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  #222222 50%,#111111 50%); /* IE10+ */
+        background: linear-gradient(to bottom,  #222222 50%,#111111 50%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#111111',GradientType=0 ); /* IE6-9 */
+    }
+    .btn-transparent.gradient:hover, .btn-transparent.gradient:focus, .btn-transparent.gradient:active, .btn-transparent.gradient.active, .open > .dropdown-toggle.btn-transparent {
+        background: -moz-linear-gradient(top,  #222222 50%, #111111 50%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#222222), color-stop(50%,#111111)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, #222222 50%,#111111 50%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  #222222 50%,#111111 50%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  #222222 50%,#111111 50%); /* IE10+ */
+        background: linear-gradient(to bottom,  #222222 50%,#111111 50%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#111111',GradientType=0 ); /* IE6-9 */
+    }
+    .btn-transparent.gradient:active, .btn-transparent.gradient.active {
+        background: -moz-linear-gradient(top,  #267c99 50%, #007299 50%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#267c99), color-stop(50%,#007299)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  #267c99 50%,#007299 50%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  #267c99 50%,#007299 50%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  #267c99 50%,#007299 50%); /* IE10+ */
+        background: linear-gradient(to bottom,  #267c99 50%,#007299 50%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#267c99', endColorstr='#007299',GradientType=0 ); /* IE6-9 */
+    }
+    .btn-transparent.gradient.disabled {
+        background: -moz-linear-gradient(top,  #444444 50%, #333333 50%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#444444), color-stop(50%,#333333)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  #444444 50%,#333333 50%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  #444444 50%,#333333 50%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  #444444 50%,#333333 50%); /* IE10+ */
+        background: linear-gradient(to bottom,  #444444 50%,#333333 50%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#444444', endColorstr='#333333',GradientType=0 ); /* IE6-9 */
+    }
+
+  </style>
+
+  <script>
+    $(function() {
+
+      // try to initialize a slider
+      console.log("trying to initialize slider")
+
+      $("#div-slider-volume-inner").rangeslider({
+        polyfill: false,
+        onSlide: volumeSliderCallbackOnSlide,
+        onSlideEnd: volumeSliderCallbackOnSlideEnd
+      });
+
+      // debug info
+      $("#debug-text").text(
+        "html height: " + $("html").height() + " " +
+        "content-pane height: " + $(".content-pane").height()
+      )
+    });
+  </script>
+</head>
+<body>
+
+<div id="content-0" class="affix toolbar toolbar-top">
+  <div class="row">
+    <div class="col-xs-8 text-left">
+      <a id="main-anchor">
+        <a class="navbar-brand" href="#">1812 Cannon</a>
+      </a>
+    </div>
+    <div class="col-xs-4 text-right">
+      <a href="#settings-anchor">
+        <span id="span-main-settings" class="glyphicon glyphicon-info-sign" data-toggle="modal" data-target="#modal-info" style="vertical-align: middle; font-size: 32px; color: #555;"></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="content-0-1" class="affix toolbar toolbar-bottom">
+  <div class="row">
+    <div class="col-xs-12 text-left">
+      <span id="toolbar-bottom-left">
+
+          <span id="span-main-status" class="btn btn-default gradient btn-transparent">
+              <span id="toolbar-bottom-left-inner">
+                <span class="vertical-center" style="display: inherit; height: 100%; width: 100%;">
+                  <span id="icon-main-status" class="glyphicon glyphicon-flash vertical-center"></span>
+                  <span id="text-main-status" class="vertical-center" style="font-size: 16px; color: #555;">Active</span>
+                </span>
+              </span>
+          </span>
+
+          <span class="" style="border-color: #333333; margin-left: 5px; padding-left: 5px; padding-right: 5px;">
+            <span id="icon-main-volume" class="glyphicon glyphicon-volume-off" style="vertical-align: middle; font-size: 32px; color: #555;"></span>
+            <span style="font-size: 16px; color: #555;"></span>
+          </span>
+
+      </span>
+
+
+      <div id="span-main-volume">
+        <div id="div-slider-volume">
+          <input id="div-slider-volume-inner"
+              type="range"
+              min="0"
+              max="100"
+          />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--  -->
+
+<div class="content-pane">
+    <div class="vertical-center text-center"><button id="button-fire" type="button" class="btn btn-danger" style="font-size: 48px;"><span class="glyphicon glyphicon-certificate button-group-1"></span><span> Fire!</span></button></div>
+    <div class="vertical-center text-center"><img id="ajax-loader" alt="Loading..." src="img/ajax-loader-large.gif" /></div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-info" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">1812 Cannon</h4>
+      </div>
+      <div class="modal-body">
+        <p id="debug-text"></p>
+        <p>Web application for use in the live performance of Tchaikovsky's <i>1812 Overture</i>.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
