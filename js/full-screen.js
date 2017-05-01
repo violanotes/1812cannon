@@ -29,13 +29,14 @@ $(function() {
   var viewport = getViewport()
   $(".app-window").css("height", viewport.height + "px")
   $("body").css("height", viewport.height + "px")
-  $("#debug-text").text(viewport)
-  
+  $("#debug-text").text(
+    "vh: " + viewport.height + " " +
+    "vw: " + viewport.width
+  )
 });
 
 $(window).resize(function() {
   console.log("resized")
   var viewport = getViewport()
-  $(".app-window").css("height", viewport.height + "px")
   $("body").css("height", viewport.height + "px")
 });
