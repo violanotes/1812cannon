@@ -37,11 +37,11 @@ $(window).resize(function() {
   var viewport = getViewport()
   $("html").css("height", viewport.height + "px")
   $("body").css("height", viewport.height + "px")
-  $("#debug-text").append(
-    "ROTATED: " +
-    "vh: " + viewport.height + " " +
-    "vw: " + viewport.width + " " +
-    "html height: " + $("html").height() +
-    "body height: " + $("body").height()
-  )
+  // $("#debug-text").append(
+  //   "ROTATED: " +
+  //   "vh: " + viewport.height + " " +
+  //   "vw: " + viewport.width + " " +
+  //   "html height: " + $("html").height() +
+  //   "body height: " + $("body").height()
+  // )
 });
