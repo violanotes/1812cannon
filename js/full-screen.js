@@ -35,8 +35,11 @@ $(window).resize(function() {
   console.log("resized")
   var viewport = getViewport()
   $("body").css("height", viewport.height + "px")
-  $("#debug-text").text(
+  $("#debug-text").append(
+    "ROTATED: " +
     "vh: " + viewport.height + " " +
-    "vw: " + viewport.width
+    "vw: " + viewport.width + " " +
+    "html height: " + $("html").height() +
+    "body height: " + $("body").height()
   )
 });
