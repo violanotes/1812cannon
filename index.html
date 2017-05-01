@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>1813 Cannon</title>
+  <title>1812 Cannon</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -106,8 +106,8 @@
       padding-top: 50px;
       padding-bottom: 50px;
       height:100%;
-      border: 0px solid yellow;
-      /*overflow: hidden;*/
+      border: 2px solid yellow;
+      overflow: auto;
     }
 
     .toolbar {
@@ -130,7 +130,7 @@
 
     .content-pane {
       padding: 0px;
-      border: 0px solid red;
+      border: 2px solid red;
       height: 100%;
       /*height: -webkit-calc(100vh - 150px);
       height: -moz-calc(100vh - 150px);
@@ -309,6 +309,11 @@
         onSlideEnd: volumeSliderCallbackOnSlideEnd
       });
 
+      // debug info
+      $("#debug-text").text(
+        "html height: " + $("html").height() + " " +
+        "content-pane height: " + $(".content-pane").height()
+      )
     });
   </script>
 </head>
@@ -381,6 +386,7 @@
         <h4 class="modal-title">1812 Cannon</h4>
       </div>
       <div class="modal-body">
+        <p id="debug-text"></p>
         <p>Web application for use in the live performance of Tchaikovsky's <i>1812 Overture</i>.</p>
       </div>
       <div class="modal-footer">
