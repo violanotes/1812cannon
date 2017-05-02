@@ -32,5 +32,6 @@ AUTOPLAY = (function() {
         audio.src = src;
     } catch(e) {
         console.log('[AUTOPLAY-ERROR]', e);
+        $("#debug-text").append("autoplay error: " + e)
     }
 })();
