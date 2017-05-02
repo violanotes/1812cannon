@@ -14,7 +14,7 @@ function onBeginLoadingAJAXContent() {
 function onEndLoadingAJAXContent() {
   currentSettings["loading"] = false
   $("#ajax-loader").css("display", "none")
-  $("#button-fire").css("display", "initial")
+  $("#button-fire").css("display", "inline")
   readyStatusButton()
 }
 
@@ -181,7 +181,7 @@ function clickStatusButton() {
 
 function readyStatusButton() {
   $("#span-main-status").removeClass("disabled")
-  $("#icon-main-status").css("display", "initial")
+  $("#icon-main-status").css("display", "inline")
   $("#text-main-status").css("color", "#555")
   currentSettings["enabled"] == true ?
     $("#text-main-status").text("Enabled") :

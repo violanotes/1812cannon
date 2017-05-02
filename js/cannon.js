@@ -1,7 +1,16 @@
 // global variable cannon
 cannon = (function() {
-  var cannonAudio = new Audio("audio/cannon4.wav")  // resource
+  var cannonAudio = new Audio()  // resource
   cannonAudio.volume = 0.5  // default volume
+
+  if (!!(cannonAudio.canPlayType && cannonAudio.canPlayType('audio/wav;').replace(/no/, ''))) {
+    console.log("can play wav")
+    cannonAudio.src = "audio/cannon4.wav"
+  } else {
+    console.log("cannot play wav")
+    cannonAudio.src = "audio/cannon4.mp3"
+  }
+
 
   // set up audio queue
   var cannonQueue = [cannonAudio]
@@ -14,6 +23,11 @@ cannon = (function() {
 
   var load = function(callback) {
     $(cannonAudio).bind("canplaythrough", function() {
+      cannonAudio.volume = currentSettings["volume"] / 100
+      callback()
+    })
+    $(cannonAudio).bind("onloadeddata", function() {
+      cannonAudio.volume = currentSettings["volume"] / 100
       callback()
     })
     cannonAudio.preload = 'auto'
@@ -27,7 +41,6 @@ cannon = (function() {
       if (cannonTracker > 20) {
         cannonQueue.push(cannonQueue[0].cloneNode());  // as sound is playing add another sound to the cannon queue.
       }
-
       cannonTracker = cannonTracker + 1
     }
   }
