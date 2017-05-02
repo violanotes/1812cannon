@@ -18,10 +18,11 @@ cannon = (function() {
 
   // set up audio queue
   var cannonQueue = [cannonAudio]
+  var cannonCount = 50
   var cannonTracker = 0
 
   // create a big queue of cannon sounds
-  for (var i = 0; i < 25; i++) {
+  for (var i = 0; i < cannonCount; i++) {
     cannonQueue.push(cannonQueue[0].cloneNode())
   }
 
@@ -47,10 +48,8 @@ cannon = (function() {
     if (currentSettings["enabled"] == true) {
       cannonQueue[cannonTracker].play();  // play sound
 
-      if (cannonTracker > 20) {
-        cannonQueue.push(cannonQueue[0].cloneNode());  // as sound is playing add another sound to the cannon queue.
-      }
-      cannonTracker = cannonTracker + 1
+      cannonTracker === cannonCount - 1 ?
+        cannonTracker = 0 : cannonTracker = cannonTracker + 1
     }
   }
 

@@ -300,7 +300,7 @@ function detectAudioSupport() {
     if (!AUTOPLAY) {
       showBrowserUnsupported()
     }
-  }, 5000)
+  }, 10000)  // give network ten seconds
 }
 
 function showBrowserUnsupported() {
