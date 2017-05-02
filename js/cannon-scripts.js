@@ -304,6 +304,7 @@ function detectAudioSupport() {
 }
 
 function showBrowserUnsupported() {
+  $("#ajax-loader").css("display", "none")
   $("#browser-unsupported-message").css("display", "inline")
 }
 
