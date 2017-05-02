@@ -295,6 +295,14 @@ function performUnmute() {
   currentSettings["muted"] = false
 }
 
+function detectAudioSupport() {
+  setTimeout(function() {
+    if (!AUTOPLAY) {
+      showBrowserUnsupported()
+    }
+  })
+}
+
 function showBrowserUnsupported() {
   $("#browser-unsupported-message").css("display", "inline")
 }
