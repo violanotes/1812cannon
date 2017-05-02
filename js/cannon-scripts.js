@@ -295,6 +295,10 @@ function performUnmute() {
   currentSettings["muted"] = false
 }
 
+function showBrowserUnsupported() {
+  $("#browser-unsupported-message").css("display", "inline")
+}
+
 function afterChangeAnySetting() {
 
 }

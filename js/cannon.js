@@ -10,7 +10,7 @@ cannon = (function() {
     console.log("can play mpeg")
     cannonAudio.src = "audio/cannon4.mp3"
   } else {
-    $("#browser-unsupported-message").css("display", "inline")
+    showBrowserUnsupported()
   }
 
   // browser-unsupported-message
@@ -35,7 +35,12 @@ cannon = (function() {
       callback()
     })
     cannonAudio.preload = 'auto'
-    cannonAudio.load()
+    try {
+      cannonAudio.load()
+    } catch (e) {
+      showBrowserUnsupported()
+      $("#debug-text").append("ERROR: " + e)
+    }
   }
 
   var fire = function() {
