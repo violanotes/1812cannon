@@ -6,10 +6,14 @@ cannon = (function() {
   if (!!(cannonAudio.canPlayType && cannonAudio.canPlayType('audio/wav;').replace(/no/, ''))) {
     console.log("can play wav")
     cannonAudio.src = "audio/cannon4.wav"
-  } else {
-    console.log("cannot play wav")
+  } else if(!!(cannonAudio.canPlayType && cannonAudio.canPlayType('audio/mpeg;').replace(/no/, ''))) {
+    console.log("can play mpeg")
     cannonAudio.src = "audio/cannon4.mp3"
+  } else {
+    $("#browser-unsupported-message").css("display", "inline")
   }
+
+  // browser-unsupported-message
 
 
   // set up audio queue

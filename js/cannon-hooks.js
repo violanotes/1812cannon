@@ -25,9 +25,13 @@ $(function() {
     saveSettings()
   });
 
-  $("#button-fire").click(function() {
+  $("#button-fire").mousedown(function() {
     fireCannon()
   });
+
+  $("#button-fire").bind("touchstart", function() {
+    fireCannon()
+  })
 
   window.addEventListener('keydown', function(e) {
     if(e.keyCode == 32 && e.target == document.body) {
