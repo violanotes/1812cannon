@@ -14,6 +14,7 @@ $(function() {
   // load GUI components that require JS
   initializeGUI()
   fetchAJAXContent()
+  detectAudioSupport()
 
   loadSavedSettings(readSavedSettings());
 
