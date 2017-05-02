@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>1814 Cannon</title>
+  <title>1812 Cannon</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -16,6 +16,7 @@
   <script src="js/jquery.cookie.js"></script>
   <script src="js/rangeslider.min.js"></script>
   <script src="js/full-screen.js"></script>
+  <script src="js/cannon.js"></script>
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
@@ -100,15 +101,15 @@
     html {
       height: 100%;
       height: 100vh;
-      /*overflow: hidden;*/
+      overflow: hidden;
     }
 
     body {
       padding-top: 50px;
       padding-bottom: 50px;
       height:100%;
-      border: 2px solid yellow;
-      overflow: auto;
+      /*border: 2px solid yellow;*/
+      overflow: hidden;
     }
 
     .toolbar {
@@ -131,7 +132,7 @@
 
     .content-pane {
       padding: 0px;
-      border: 2px solid red;
+      /*border: 2px solid red;*/
       height: 100%;
       /*height: -webkit-calc(100vh - 150px);
       height: -moz-calc(100vh - 150px);
@@ -311,10 +312,10 @@
       });
 
       // debug info
-      $("#debug-text").text(
-        "html height: " + $("html").height() + " " +
-        "content-pane height: " + $(".content-pane").height()
-      )
+      // $("#debug-text").text(
+      //   "html height: " + $("html").height() + " " +
+      //   "content-pane height: " + $(".content-pane").height()
+      // )
     });
   </script>
 </head>
@@ -376,6 +377,7 @@
 <div class="content-pane">
     <div class="vertical-center text-center"><button id="button-fire" type="button" class="btn btn-danger" style="font-size: 48px;"><span class="glyphicon glyphicon-certificate button-group-1"></span><span> Fire!</span></button></div>
     <div class="vertical-center text-center"><img id="ajax-loader" alt="Loading..." src="img/ajax-loader-large.gif" /></div>
+    <div id="browser-unsupported-message" class="vertical-center text-center" style="display: none; font-size: 24px;"><span class="glyphicon glyphicon-remove" style="font-size: 24px; color: #555555; vertical-align: middle; text-align: left;"></span><span style="font-size: 12px; color: #555555;"> It looks like your browser isn't supported.</span></div>
 </div>
 
 <!-- Modal -->
