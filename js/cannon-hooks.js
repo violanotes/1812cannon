@@ -25,6 +25,12 @@ $(function() {
   $("#button-settings-ok").click(function() {
     saveSettings()
   });
+  
+  $("body").keydown(function(e) {
+   if (e.which === 32) {
+    fireCannon(); 
+   }
+  });
 
   $("#button-fire").mousedown(function() {
     fireCannon()
